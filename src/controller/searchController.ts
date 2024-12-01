@@ -37,7 +37,7 @@ export default {
                 console.log('Sponsored Domains:', sponsoredDomains);
 
                 // Fetch pagination links on specific conditions
-                if (pagesLinkLength === 0 || pagesLinkLength === 9) {
+                if (pagesLinkLength === 0 || pagesLinkLength === 8) {
                     const links = await scrapers.pagesLink(htmlContent);
                     const formattedLinks = links.map((link) => `https://www.google.com${link}`);
                     pagesLink = [...new Set([...pagesLink, ...formattedLinks])];
@@ -53,7 +53,7 @@ export default {
                 const sponsoredData: SponsoredData = {
                     query,
                     sponsoredDomains,
-                    pagesLinkLength: 15
+                    pagesLinkLength
                 };
                 httpResponse(req, res, 200, responseMessage.SPONSORED_DOMAIN, sponsoredData);
             } else {
