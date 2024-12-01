@@ -1,24 +1,24 @@
 import app from './app';
 import config from './config/config';
-// import { initRateLimiter } from './config/rateLimter';
-// import databaseService from './service/databaseService';
+import { initRateLimiter } from './config/rateLimter';
+import databaseService from './service/databaseService';
 import logger from './util/logger';
 
 const server = app.listen(config.PORT);
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-( () => {
+(async () => {
     try {
-        //Database Conntion
-        // const connection = await databaseService.connect();
-        // logger.info('DATABASE_NAME', {
-        //     meta: {
-        //         CONNECTION_NAME: connection.name
-        //     }
-        // });
+        // Database Conntion
+        const connection = await databaseService.connect();
+        logger.info('DATABASE_NAME', {
+            meta: {
+                CONNECTION_NAME: connection.name
+            }
+        });
 
-        // initRateLimiter(connection);
-        // logger.info('RATE_LIMITER_INITIAED');
+        initRateLimiter(connection);
+        logger.info('RATE_LIMITER_INITIAED');
 
         logger.info(`APPLICATION_STARTD`, {
             meta: {
