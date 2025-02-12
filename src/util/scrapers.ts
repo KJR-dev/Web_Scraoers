@@ -10,8 +10,12 @@ export interface FetchHtmlElementOptions {
 export default {
     fetchSponsoredHtmlElement: async (websiteUrl: string): Promise<string> => {
         let fullHtml: string | null = null;
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            headless: false,
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-blink-features=AutomationControlled']
+        });
         const page = await browser.newPage();
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36');
 
         try {
             await page.goto(websiteUrl, { waitUntil: 'domcontentloaded' });
@@ -25,7 +29,8 @@ export default {
             const response = await axios.get<string>(websiteUrl);
             const $ = cheerio.load(response.data);
             fullHtml = $.html();
-        } finally {
+        } 
+        finally {
             await browser.close();
         }
 
