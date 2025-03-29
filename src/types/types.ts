@@ -70,5 +70,11 @@ export type EmailSendData = {
     templateId: string;
 };
 
+export type EmailEntry = {
+    email: string;
+    name: string;
+};
+
+export type EmailDetailsType = Record<string, EmailEntry>;
 
 
