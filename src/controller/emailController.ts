@@ -27,7 +27,8 @@ export default {
                 templateId: templateId,
                 personalizations,
                 asm: {
-                    groupId: 28003
+                    groupId: EmailDetails[sender]?.groupId,
+                    groupsToDisplay: [(EmailDetails[sender]?.groupId)]
                 }
             };
 
@@ -46,12 +47,6 @@ export default {
         }
     }
 };
-
-
-
-
-
-
 
 
 

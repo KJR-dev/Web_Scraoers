@@ -73,8 +73,8 @@ export type EmailSendData = {
 export type EmailEntry = {
     email: string;
     name: string;
+    groupId: number;
 };
 
 export type EmailDetailsType = Record<string, EmailEntry>;
-
 
